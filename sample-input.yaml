@@ -19,6 +19,7 @@ foo:
        pigs: 49
        rats: 2
        humans: -1
+       cows: 2
      serverfarm:
        buildings: 4
        racks: 84
