@@ -3,9 +3,8 @@
 """Flatten config..."""
 
 import collections
-#import flask
 import json
-import re
+# import re
 import sys
 import yaml
 
@@ -14,17 +13,15 @@ def filter_ranches(config):
     """Returns the input dict with noncompliant ranches expunged"""
 
     approved_ranches = {
-        k:v for (k,v)
-        in config['foo']['ranches'].items()
-        if v.get('cows', 0) > 5
+        k: v for (k, v) in config["foo"]["ranches"].items()
+        if v.get("cows", 0) >= 2 and v.get("hectares", 0) >= 4
     }
 
-    config['foo']['ranches'] = approved_ranches
-
+    config["foo"]["ranches"] = approved_ranches
     return config
 
 
-def flatten(d, parent_key='', sep='.'):
+def flatten(d, parent_key="", sep="."):
     # https://stackoverflow.com/a/6027615
     items = []
     for k, v in d.items():
@@ -37,7 +34,9 @@ def flatten(d, parent_key='', sep='.'):
 
 
 def new_vocab(s):
-    return re.sub('client', 'supplicant', s)
+    # First check fo the the bigger word clientele and then client
+    # Did this to avoid passing big files more than once ( probably not the best implementation)
+    return s.replace('clientele', 'fans').replace('client', 'visitor')
 
 
 def main():
@@ -46,10 +45,7 @@ def main():
     loaded = yaml.safe_load(sys.stdin)
     flat = flatten(filter_ranches(loaded))
     clean_string = new_vocab(json.dumps(flat))
-
-    out = clean_string
-
-    print(out)
+    print(clean_string)
 
 
 if __name__ == "__main__":
