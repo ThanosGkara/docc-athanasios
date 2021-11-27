@@ -5,17 +5,17 @@ set -e
 
 ## Creating if it does not exist, a results dir in the workdir to store the files created
 WORKDIR=${PWD}/results
-mkdir -p $WORKDIR
+mkdir -p "$WORKDIR"
 
 ### Simple function to perform the operation on files
 file_access () {
 
   ## Check if the file exists on order to create it
   if [ ! -f "$1" ]; then 
-    echo "1" > $1
+    echo "1" > "$1"
   else
     ## Read the value from the file and then we override it 
-    echo $(expr $(<$1) + 1 ) > $1
+    echo $(expr $(<$1) + 1) > "$1"
   fi
 
 }
@@ -24,7 +24,7 @@ file_access () {
 ## Check number of arguments given
 if [[ $# -gt 1 ]]; then
   printf "Expected only 1 argument but %d given\n" $#
-  printf "usage: %s 1113574\n" ${0##*/} >&2 ### Instead of using basename command POSIX shells
+  printf "usage: %s 1113574\n" "${0##*/}" >&2 ### Instead of using basename command POSIX shells
   exit 2
 fi
 
@@ -43,21 +43,21 @@ while [[ ${#input} -gt 0 ]]; do
 
   ## Check if any provided digit is not a number
   if [[ -z "${current_digit##*[!0-9]*}" ]]; then
-    printf "Given argument contains illegal char '%s'\n" $current_digit
-    printf "usage: %s 1113574\n" ${0##*/} >&2 ### Instead of using basename command POSIX shells
+    printf "Given argument contains illegal char '%s'\n" "$current_digit"
+    printf "usage: %s 1113574\n" "${0##*/}" >&2 ### Instead of using basename command POSIX shells
     exit 2
   fi
 
   ## Accessing the files in order to increment their value
   case $current_digit in
   1)
-    file_access $WORKDIR/"PTF"
+    file_access "$WORKDIR/PTF"
     ;;
   4)
-    file_access $WORKDIR/"ACC"
+    file_access "$WORKDIR/ACC"
     ;;
   8)
-    file_access $WORKDIR/"BANK"
+    file_access "$WORKDIR/BANK"
     ;;
   esac
   
@@ -68,9 +68,9 @@ done
 
 ## Accessing the files in order to increment their value
 if [[ $(expr $1 % 5) -eq 0 ]]; then
-  file_access $WORKDIR/"ACT"
+  file_access "$WORKDIR/ACT"
 elif [[ $(expr $1 % 7) -eq 0 ]]; then
-  file_access $WORKDIR/"BND"
+  file_access "$WORKDIR/BND"
 elif [[ $(expr $1 % 9) -eq 0 ]]; then
-  file_access $WORKDIR/"CRYPT"
+  file_access "$WORKDIR/CRYPT"
 fi

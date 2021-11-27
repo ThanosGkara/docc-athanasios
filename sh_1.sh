@@ -8,7 +8,7 @@ PRE_RESULT=''
 ## Check number of arguments given
 if [[ $# -gt 1 ]]; then
   printf "Expected only 1 argument but %d given\n" $#
-  printf "usage: %s 1113574\n" ${0##*/} >&2 ### Instead of using basename command POSIX shells
+  printf "usage: %s 1113574\n" "${0##*/}" >&2 ### Instead of using basename command POSIX shells
   exit 2
 fi
 
@@ -27,8 +27,8 @@ while [[ ${#input} -gt 0 ]]; do
 
   ## Check if any provided digit is not a number
   if [[ -z "${current_digit##*[!0-9]*}" ]]; then
-    printf "Given argument contains illegal char '%s'\n" $current_digit
-    printf "usage: %s 1113574\n" ${0##*/} >&2 ### Instead of using basename command POSIX shells
+    printf "Given argument contains illegal char '%s'\n" "$current_digit"
+    printf "usage: %s 1113574\n" "${0##*/}" >&2 ### Instead of using basename command POSIX shells
     exit 2
   fi
 
