@@ -25,7 +25,7 @@ def transform_handler():
 def main():
     """ Prepares and launches the bottle app. """
     app = bottle.default_app()
-    app.run(port=8000, host='127.0.0.1')
+    app.run(port=8000, host='0.0.0.0')
 
 
 if __name__ == '__main__':
