@@ -9,7 +9,6 @@ mkdir -p "$WORKDIR"
 
 ### Simple function to perform the operation on files
 file_access () {
-
   ## Check if the file exists on order to create it
   if [ ! -f "$1" ]; then 
     echo "1" > "$1"
@@ -17,7 +16,6 @@ file_access () {
     ## Read the value from the file and then we override it 
     echo $(expr $(<$1) + 1) > "$1"
   fi
-
 }
 
 
@@ -43,7 +41,7 @@ while [[ ${#input} -gt 0 ]]; do
 
   ## Check if any provided digit is not a number
   if [[ -z "${current_digit##*[!0-9]*}" ]]; then
-    printf "Given argument contains illegal char '%s'\n" "$current_digit"
+    printf "Given argument contains illegal char '%s'\nArgument must contains integer only" "$current_digit"
     printf "usage: %s 1113574\n" "${0##*/}" >&2 ### Instead of using basename command POSIX shells
     exit 2
   fi
