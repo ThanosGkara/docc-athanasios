@@ -5,9 +5,6 @@ from config_reshape import flatten, new_vocab, filter_ranches
 import json
 import yaml
 
-_names = set()                    # the set of names
-
-
 @post('/transform')
 def transform_handler():
     """
