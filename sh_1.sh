@@ -27,7 +27,7 @@ while [[ ${#input} -gt 0 ]]; do
 
   ## Check if any provided digit is not a number
   if [[ -z "${current_digit##*[!0-9]*}" ]]; then
-    printf "Given argument contains illegal char '%s'\nArgument must contains integer only" "$current_digit"
+    printf "Given argument contains illegal char '%s'\nArgument must contains integer only\n" "$current_digit"
     printf "usage: %s 1113574\n" "${0##*/}" >&2 ### Instead of using basename command POSIX shells
     exit 2
   fi
