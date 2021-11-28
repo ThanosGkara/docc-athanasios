@@ -19,7 +19,7 @@ def transform_handler():
 
     response.content_type = "application/json"
     response.body = clean_string
-    return response.body
+    return response
 
 
 def main():
